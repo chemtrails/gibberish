@@ -12,12 +12,14 @@ def serve_font():
 @app.route('/')
 def index():
     with open('sample_text.txt', 'r') as f:
-        new_text, random_string = font_mod(f.read())
+        content = f.read()
+        new_text, random_string = font_mod(content)
         app.config['FONT_FILE'] = random_string
     
     return render_template(
         'index.html', 
-        text = new_text,
+        original_text = content,
+        new_text = new_text,
         random_string = random_string
     )
 
